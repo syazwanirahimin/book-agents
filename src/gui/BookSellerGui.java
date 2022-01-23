@@ -4,17 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
+import javax.swing.*;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import agents.BookSellerAgent;
 
@@ -37,6 +29,17 @@ public class BookSellerGui extends JFrame {
 		p.add(new JLabel("      Price:"));
 		priceField = new JTextField(15);
 		p.add(priceField);
+		JRadioButton radFiction = new JRadioButton();
+		JRadioButton radNonFiction = new JRadioButton();
+		ButtonGroup G = new ButtonGroup();
+		radFiction.setText("Fiction");
+		radNonFiction.setText("Non-Fiction");
+		radFiction.setBounds(120, 30, 120, 50);
+		radNonFiction.setBounds(250, 30, 80, 50);
+		p.add(radFiction);
+		p.add(radNonFiction);
+		G.add(radFiction);
+		G.add(radNonFiction);
 		getContentPane().add(p, BorderLayout.CENTER);
 
 		JButton addButton = new JButton("Add");

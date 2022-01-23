@@ -6,6 +6,8 @@ import jade.core.behaviours.Behaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 
+import javax.swing.*;
+
 public class RequestPerformer extends Behaviour{
   private AID bestSeller;
   private int bestPrice;
@@ -76,12 +78,16 @@ public class RequestPerformer extends Behaviour{
         reply = myAgent.receive(mt);
         if (reply != null) {
           if (reply.getPerformative() == ACLMessage.INFORM) {
+            JFrame f = new JFrame();
+            JOptionPane.showMessageDialog(f,bookTitle+" successfully purchased from agent "+reply.getSender().getName() + "\nPrice = "+bestPrice ,"info", JOptionPane.INFORMATION_MESSAGE);
             System.out.println(bookTitle+" successfully purchased from agent "+reply.getSender().getName());
             System.out.println("Price = "+bestPrice);
             myAgent.doDelete();
           }
           else {
             System.out.println("Attempt failed: requested book already sold.");
+            JFrame f = new JFrame();
+            JOptionPane.showMessageDialog(f,"Attempt failed: requested book already sold.","error", JOptionPane.WARNING_MESSAGE);
           }
 
           step = 4;
@@ -95,6 +101,8 @@ public class RequestPerformer extends Behaviour{
 
   public boolean done() {
     if (step == 2 && bestSeller == null) {
+      JFrame f = new JFrame();
+      JOptionPane.showMessageDialog(f,"Attempt failed: "+bookTitle+" not available for sale","info", JOptionPane.ERROR_MESSAGE);
       System.out.println("Attempt failed: "+bookTitle+" not available for sale");
     }
     return ((step == 2 && bestSeller == null) || step == 4);

@@ -1,9 +1,9 @@
-package agents;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package agents;
 
 import jade.core.Agent;
 import behaviours.RequestPerformer;
@@ -13,6 +13,8 @@ import jade.domain.DFService;
 import jade.domain.FIPAException;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
+
+import javax.swing.*;
 
 import gui.BookBuyerGui;
 
@@ -51,6 +53,8 @@ public class BookBuyerAgent extends Agent {
                         sellerAgents = new AID[result.length];
                         for(int i = 0; i < result.length; i++) {
                             sellerAgents[i] = result[i].getName();
+                            JFrame f = new JFrame();
+                            JOptionPane.showMessageDialog(f,"Found the following seller agents: " + "\n" + sellerAgents[i].getName(),"info", JOptionPane.INFORMATION_MESSAGE);
                             System.out.println(sellerAgents[i].getName());
                         }
 
@@ -63,10 +67,14 @@ public class BookBuyerAgent extends Agent {
             });
         } else {
             System.out.println("No target book title specified");
+            JFrame f1 = new JFrame();
+            JOptionPane.showMessageDialog(f1,"No target book title specified","error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     protected void takeDown() {
+        JFrame f2 = new JFrame();
+        JOptionPane.showMessageDialog(f2,"Buyer agent " + getAID().getName() + " terminating","info", JOptionPane.INFORMATION_MESSAGE);
         System.out.println("Buyer agent " + getAID().getName() + " terminating");
         gui.dispose();
     }

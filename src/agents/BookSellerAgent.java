@@ -6,19 +6,18 @@ import behaviours.OfferRequestServer;
 import behaviours.PurchaseOrderServer;
 import gui.BookSellerGui;
 
+import jade.core.Agent;
 import jade.core.behaviours.*;
 import jade.domain.DFService;
 import jade.domain.FIPAException;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
-
-import jade.core.Agent;
+import javax.swing.*;
 
 public class BookSellerAgent extends Agent{
 
     private Hashtable catalogue;
     private BookSellerGui gui;
-    private String price;
 
     protected void setup() {
         catalogue = new Hashtable();
@@ -61,18 +60,11 @@ public class BookSellerAgent extends Agent{
         addBehaviour(new OneShotBehaviour() {
             public void action() {
                 catalogue.put(title, price);
+                JFrame f = new JFrame();
+                JOptionPane.showMessageDialog(f,title + " inserted with a price of " + price,"info", JOptionPane.INFORMATION_MESSAGE);
                 System.out.println(title + " inserted with a price of " + price);
             }
         });
-    }
-
-
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
     }
 
     public Hashtable getCatalogue() {

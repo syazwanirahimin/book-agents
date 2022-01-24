@@ -61,7 +61,7 @@ public class BookSellerAgent extends Agent{
             public void action() {
                 catalogue.put(title, price);
                 JFrame f = new JFrame();
-                JOptionPane.showMessageDialog(f,title + " inserted with a price of " + price,"info", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(f,title + " inserted with a price of RM" + price,"info", JOptionPane.INFORMATION_MESSAGE);
                 System.out.println(title + " inserted with a price of " + price);
             }
         });

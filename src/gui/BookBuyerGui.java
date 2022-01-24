@@ -30,20 +30,14 @@ public class BookBuyerGui extends JFrame{
         myAgent = a;
 
         JPanel p = new JPanel();
-        p.setLayout(new GridLayout(3, 3));
-        p.add(new JLabel("              Book title:"));
-
-
+        p.setLayout(new GridLayout(0, 1));
+        p.add(new JLabel("<html><center>Welcome To E-Shop.<br/>Please Select Book Name :</html>", SwingConstants.CENTER));
         // list of books available for buyer
         String books[] = {"Harry Potter","To Kill a Mockingbird","The Great Gatsby","Da Vinci Code","Pride and Prejudice"};
         JComboBox cb = new JComboBox(books); // create combobox
-
-
         p.add(cb); //add comboBox to panel
         JLabel output = new JLabel();
         p.add(output);
-
-
         getContentPane().add(p, BorderLayout.CENTER);
         p = new JPanel();
         JButton addButton = new JButton("Buy");
@@ -87,7 +81,7 @@ public class BookBuyerGui extends JFrame{
         int centerX = (int)screenSize.getWidth() / 2;
         int centerY = (int)screenSize.getHeight() / 2;
 
-        setSize(550,300);
+        setSize(300,200);
         setLocation(centerX - getWidth() / 2, centerY - getHeight() / 2);
         super.setVisible(true);
     }

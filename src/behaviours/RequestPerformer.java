@@ -1,6 +1,17 @@
 package behaviours;
 
 import agents.BookBuyerAgent;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import agents.BookBuyerAgent;
+import jade.core.AID;
+import jade.core.behaviours.Behaviour;
+import jade.lang.acl.ACLMessage;
+import jade.lang.acl.MessageTemplate;
+
 import jade.core.AID;
 import jade.core.behaviours.Behaviour;
 import jade.lang.acl.ACLMessage;
@@ -16,10 +27,13 @@ public class RequestPerformer extends Behaviour{
   private int step = 0;
   private BookBuyerAgent bbAgent;
   private String bookTitle;
+  Date currentDate = new Date();
+  Calendar c = Calendar.getInstance();
 
   public RequestPerformer(BookBuyerAgent a) {
     bbAgent = a;
     bookTitle = a.getBookTitle();
+
   }
 
   public void action() {
@@ -79,7 +93,11 @@ public class RequestPerformer extends Behaviour{
         if (reply != null) {
           if (reply.getPerformative() == ACLMessage.INFORM) {
             JFrame f = new JFrame();
-            JOptionPane.showMessageDialog(f,bookTitle+" successfully purchased from agent "+reply.getSender().getName() + "\nPrice = "+bestPrice ,"info", JOptionPane.INFORMATION_MESSAGE);
+            c.setTime(currentDate);
+            c.add(Calendar.DATE, 3);
+
+            Date deliveryDate = c.getTime();
+            JOptionPane.showMessageDialog(f,bookTitle+" successfully purchased from agent "+reply.getSender().getName() + "\nBook Price = RM"+bestPrice + ". The book will start process to deliver by: " + deliveryDate ,"info", JOptionPane.INFORMATION_MESSAGE);
             System.out.println(bookTitle+" successfully purchased from agent "+reply.getSender().getName());
             System.out.println("Price = "+bestPrice);
             myAgent.doDelete();
